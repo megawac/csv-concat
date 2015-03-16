@@ -1,0 +1,22 @@
+{
+  "name": "csv-concat",
+  "version": "1.0.1",
+  "description": "Join a folder of csv files into one file",
+  "main": "bin/csv-concat",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "csv",
+    "chunks"
+  ],
+  "author": "megawac <github.com/megawac>",
+  "license": "wtfpl",
+  "dependencies": {
+    "fast-csv": "^0.6.0",
+    "lodash.pick": "^3.0.0",
+    "merge-stream": "^0.1.7",
+    "yargs": "^3.5.4"
+  },
+  "bin": "./bin/csv-concat"
+}

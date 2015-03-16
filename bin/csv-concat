@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+var argv = require('yargs')
+	.usage('Usage: $0 <inputFolder/> <file.csv> [--delimiter=,] [--quote="]')
+	.demand(2)
+	.default('delimiter', ',')
+    .default('quote', '"')
+    .default('headers', true)
+    .argv;
+
+var csv = require('fast-csv');
+var merge = require('merge-stream');
+
+var fs = require('fs');
+var path = require('path');
+
+var input = path.resolve(argv._[0]),
+	output = path.resolve(argv._[1]);
+
+
+var options = require('lodash.pick')(argv, 'delimiter', 'quote', 'headers');
+
+var streams = fs.readdirSync(input).map(function(file) {
+	var s = fs.createReadStream(path.join(input, file));
+	return csv.fromStream(s, options);
+});
+
+merge.apply(null, streams)
+	.pipe(csv.createWriteStream(options))
+	.pipe(fs.createWriteStream(output));
