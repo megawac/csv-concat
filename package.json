@@ -18,5 +18,6 @@
     "merge-stream": "^0.1.7",
     "yargs": "^3.5.4"
   },
+  "preferGlobal": "true",
   "bin": "./bin/csv-concat"
 }
